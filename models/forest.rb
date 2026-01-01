@@ -9,9 +9,41 @@ class Forest < Tree
     end
 
     def load_trees
+        puts "load_trees\t#{@dir}"
         Dir[@dir + '/*/*.tree'].each do |filepath|
             @trees << Tree.new(filepath)
         end
+    end
+
+    def load_leaves
+        puts "load_leaves\t#{@dir}"
+        Dir[@dir + '/*/*.tree'].each do |filepath|
+            @leaves << Leaf.new(filepath)
+        end
+        Dir[@dir + '/*/*.branch'].each do |filepath|
+            @leaves << Leaf.new(filepath)
+        end
+        Dir[@dir + '/*/*.leaf'].each do |filepath|
+            @leaves << Leaf.new(filepath)
+        end
+    end
+
+    def find(id)
+        return find_tree(id) if id.end_with?('.tree')
+        return find_branch(id) if id.end_with?('.branch')
+        return find_leaf(id) if id.end_with?('.leaf')
+    end
+
+    def find_tree(id)
+        @trees.each do |tree|
+            puts "find_tree\t#{id}\t#{tree.id}\t#{id == tree.id}"
+            return tree if [
+                tree.id == id,
+            #   tree.id + '.tree' == id,
+            #   tree.id == id + '.tree',
+            ].any?
+        end
+        return nil
     end
 
     def debug

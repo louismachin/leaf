@@ -4,10 +4,14 @@ ARRAY_ATTRS = ['tags']
 TAG_INDICATOR = '#'
 
 class Leaf
+    attr_reader :id, :filename
     attr_reader :attributes
+    attr_reader :body
 
     def initialize(filepath)
         @filepath = filepath
+        @id = File.basename(filepath)
+        puts "Loading \"#{@id}\"..."
         begin
             load_from_file(filepath)
         rescue => error
