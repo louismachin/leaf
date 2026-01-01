@@ -16,7 +16,7 @@ end
 
 get '/*.:ext' do
     begin
-        return erb :not_found unless ['leaf', 'branch', 'tree'].include?(params['ext'])
+        return pass unless ['leaf', 'branch', 'tree'].include?(params['ext'])
         # Get path as parts
         path = params['splat'].first + '.' + params['ext']
         parts = path.split('/')
@@ -34,8 +34,12 @@ get '/*.:ext' do
         @leaf = iota.find_leaf(traversal[-1])
         erb :show
     rescue
-        erb :not_found
+        return halt(404)
     end
+end
+
+not_found do
+    erb :not_found
 end
 
 configure do
