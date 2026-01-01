@@ -1,8 +1,8 @@
 task :test do
-    require './models/ink.rb'
-    Dir['./tests/*.ink'].each do |filepath|
+    require './models/leaf.rb'
+    Dir['./tests/*.leaf'].each do |filepath|
         puts "Inspecting \"#{filepath}\""
-        ink = Ink.new(filepath)
-        puts ink.debug
+        leaf = Leaf.new(filepath)
+        puts leaf.debug
     end
 end

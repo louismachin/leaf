@@ -3,7 +3,7 @@ ATTR_END = '---'
 ARRAY_ATTRS = ['tags']
 TAG_INDICATOR = '#'
 
-class Ink
+class Leaf
     def initialize(filepath)
         @filepath = filepath
         begin
