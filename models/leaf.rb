@@ -4,6 +4,8 @@ ARRAY_ATTRS = ['tags']
 TAG_INDICATOR = '#'
 
 class Leaf
+    attr_reader :attributes
+
     def initialize(filepath)
         @filepath = filepath
         begin
@@ -70,6 +72,11 @@ class Leaf
         return value
     end
 
+    def title
+        return '' unless @attributes.key?('title')
+        return @attributes['title']
+    end
+
     def tags
         return [] unless @attributes.key?('tags')
         return @attributes['tags']
@@ -90,8 +97,7 @@ class Leaf
 
     def debug
         return [
-            "attr=#{@attributes.inspect}",
-            "body=#{@body.inspect}"
+            "leaf=\"#{self.title}\" (#{@filepath})"
         ]
     end
 end
