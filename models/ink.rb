@@ -1,5 +1,6 @@
 ATTR_START = '---'
 ATTR_END = '---'
+ARRAY_ATTRS = ['tags']
 
 class Ink
     def initialize(filepath)
@@ -12,15 +13,18 @@ class Ink
         @attributes = {}
         if @raw.first == ATTR_START
             ix = 1
+            key_values = []
             until @raw[ix] == ATTR_END
-                key, value = @raw[ix].split(': ')
-                @attributes[key] = value
+                key_values << @raw[ix].split(': ')
                 ix += 1
             end
             until (@raw[ix] != ATTR_END) && (@raw[ix] != '')
                 ix += 1
             end
             @body = @raw[ix..-1]
+            key_values.each do |key, value|
+                set_attr(key, value, false)
+            end
         else
             @body = @raw
             set_attr('title', 'untitled')
@@ -31,8 +35,8 @@ class Ink
         filepath = @filepath unless filepath
         output = []
         output << ATTR_START
-        @attributes.each do |key, value|
-            output << "#{key}: #{value}"
+        @attributes.keys.each do |key|
+            output << "#{key}: #{get_attr(key)}"
         end
         output << ATTR_END
         output += @body
@@ -41,8 +45,19 @@ class Ink
 
 
     def set_attr(key, value, and_save = true)
-        @attributes[key] = value
+        if ARRAY_ATTRS.include?(key)
+            @attributes[key] = value.split(' ')
+        else
+            @attributes[key] = value
+        end
         save_to_file if and_save
+    end
+
+    def get_attr(key) # => returns string
+        value = @attributes[key]
+        return '' unless value
+        return value.join(' ') if ARRAY_ATTRS.include?(key)
+        return value
     end
 
     def debug
