@@ -2,8 +2,17 @@
 <html>
     <%= erb :_head %>
     <body>
-        <%= erb :_leaves, locals: { leaves: $forest.leaves } %>
-        <%= erb :_branches, locals: { branches: $forest.branches } %>
         <%= erb :_trees, locals: { trees: $forest.trees } %>
+        <%= erb :_branches, locals: { branches: $forest.branches } %>
+        <%= erb :_leaves, locals: { leaves: $forest.leaves } %>
     </body>
+
+    <script>
+        let toggles = document.getElementsByClassName('toggle')
+        for (let ix = 0; ix < toggles.length; ix++) {
+            toggles[ix].onclick = (e) => {
+                e.target.parentElement.classList.toggle('hidden')
+            }
+        }
+    </script>
 </html

@@ -1,7 +1,7 @@
 <% if leaf.is_leaf? %>
     <li>
         <a href="<%= leaf.filepath %>">
-            <b class="symbol"><%= leaf.symbol %></b> <%= leaf.title %>
+            <b class="symbol"><%= leaf.symbol %></b><%= leaf.title %>
         </a>
     </li>
 <% end %>

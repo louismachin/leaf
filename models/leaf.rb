@@ -11,7 +11,6 @@ class Leaf
     def initialize(filepath)
         @filepath = filepath
         @id = File.basename(filepath)
-        puts "Loading \"#{@id}\"..."
         begin
             load_from_file(filepath)
         rescue => error

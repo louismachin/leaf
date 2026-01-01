@@ -1,9 +1,18 @@
-:root {
+:root, pre {
     font-family: serif;
+    font-size: 16px;
 }
 
-pre {
-    font-family: serif;
+.hidden * {
+    display: none;
+}
+
+.hidden > p {
+    display: inline !important;
+}
+
+p {
+    display: inline;
 }
 
 ul {
@@ -20,12 +29,13 @@ li {
     margin: 4px 0;
 }
 
-a {
+a, .toggle {
+    cursor: pointer;
     color: #333;
     text-decoration: none;
 }
 
-a:hover {
+a:hover, .toggle:hover {
     text-decoration: underline;
 }
 
@@ -40,5 +50,5 @@ li:last-child::before {
 
 b.symbol {
     display: inline-block;
-    width: 16px;
+    width: 24px;
 }

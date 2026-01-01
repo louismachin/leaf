@@ -9,14 +9,12 @@ class Forest < Tree
     end
 
     def load_trees
-        puts "load_trees\t#{@dir}"
         Dir[@dir + '/*/*.tree'].each do |filepath|
             @trees << Tree.new(filepath)
         end
     end
 
     def load_leaves
-        puts "load_leaves\t#{@dir}"
         Dir[@dir + '/*/*.tree'].each do |filepath|
             @leaves << Leaf.new(filepath)
         end
@@ -35,14 +33,7 @@ class Forest < Tree
     end
 
     def find_tree(id)
-        @trees.each do |tree|
-            puts "find_tree\t#{id}\t#{tree.id}\t#{id == tree.id}"
-            return tree if [
-                tree.id == id,
-            #   tree.id + '.tree' == id,
-            #   tree.id == id + '.tree',
-            ].any?
-        end
+        @trees.each { |tree| return tree if tree.id == id }
         return nil
     end
 

@@ -1,9 +1,11 @@
 <li>
-    <% if branch.is_tree? %>
-        <b class="symbol"><%= branch.symbol %></b> <%= branch.title %>
-    <% else %>
-        <%= branch.title %>
-    <% end %>
+    <p class="title toggle">
+        <% if branch.is_tree? %>
+            <b class="symbol"><%= branch.symbol %></b><%= branch.title %>
+        <% else %>
+            <%= branch.title %>
+        <% end %>
+    </p>
     <%= erb :_leaves, locals: { leaves: branch.leaves } %>
     <%= erb :_branches, locals: { branches: branch.branches } %>
 </li>
