@@ -70,7 +70,7 @@ class Leaf
         else
             @attributes[key] = value
         end
-    #   save_to_file if and_save
+        save_to_file if and_save
     end
 
     def get_attr(key) # => returns string
