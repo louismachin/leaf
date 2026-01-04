@@ -1,3 +1,4 @@
 forest/*
 !forest/tests/
 !forest/tests/**
+config.yml
