@@ -7,6 +7,10 @@
             &bull;
             <a href="/<%= @leaf.uri %>/edit">Edit</a>
         </div>
-        <pre><%= @leaf.body.join('<br>') %></pre>
+        <div>
+            <% @leaf.body.each do |line| %>
+                <p><%= line %></p>
+            <% end %>
+        </div>
     </body>
 </html
