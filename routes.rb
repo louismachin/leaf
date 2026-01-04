@@ -1,13 +1,16 @@
 get '/' do
+    protect!
     erb :forest
 end
 
 get '/reload' do
+    protect!
     $forest.reload
     redirect '/'
 end
 
 get '/*/edit' do
+    protect!
     begin
         # Get path as parts
         @path = params['splat'].first
@@ -47,6 +50,7 @@ get '/*/edit' do
 end
 
 post '/*/edit' do
+    protect!
     request.body.rewind
     data = request.body.read.split("\n")
     is_branch = params['branch'].to_i == 1
@@ -95,6 +99,7 @@ post '/*/edit' do
 end
 
 get '/*.:ext' do
+    protect!
     begin
         return pass unless ['leaf', 'branch', 'tree'].include?(params['ext'])
         # Get path as parts

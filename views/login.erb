@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <%= erb :_head %>
+    <body>
+        <input id="passkey" placeholder="Passkey...">
+        <button onclick="submitLogin()">Login</button>
+    </body>
+
+    <script>
+        let submitLogin = () => {
+            let attempt = document.getElementById('passkey').value
+            fetch('/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'}, 
+                body: JSON.stringify({ attempt: attempt })
+            }).then(res => {
+                if (res.status == 200) {
+                    document.location.href = '/'
+                }
+            })
+        }
+    </script>
+</html
